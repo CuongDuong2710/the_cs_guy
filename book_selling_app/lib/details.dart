@@ -26,11 +26,11 @@ class _DetailsState extends State<Details> {
               onTap: () {
                 Navigator.pop(context);
               },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black87,
-              size: 25,
-            ),
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.black87,
+                size: 25,
+              ),
             ),
             actions: <Widget>[
               Icon(
@@ -72,7 +72,11 @@ class _DetailsPageBodyState extends State<DetailsPageBody> {
           Column(
             children: <Widget>[
               TopContainer(widget: widget),
-              AuthorContainer(widget: widget)
+              AuthorContainer(widget: widget),
+              Padding(
+                padding: EdgeInsets.only(top: 43),
+                child: GenreContainer(widget: widget),
+              )
             ],
           ),
         ],
@@ -95,19 +99,17 @@ class TopContainer extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.only(top: 30, bottom: 30),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [Color(0xfff8f8f8), Colors.white]
-        ),
-        border: Border(bottom: BorderSide(
-          color: Color(0xfff0f0f0),
-          width: 2
-        ))
-      ),
+          gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [Color(0xfff8f8f8), Colors.white]),
+          border:
+              Border(bottom: BorderSide(color: Color(0xfff0f0f0), width: 2))),
       child: Column(
         children: <Widget>[
-          SizedBox(height: 50,),
+          SizedBox(
+            height: 50,
+          ),
           Align(
             alignment: Alignment.centerRight,
             child: Container(
@@ -116,10 +118,9 @@ class TopContainer extends StatelessWidget {
               child: Text(
                 widget.bookObject.title,
                 style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black54,
-                  fontSize: 25
-                ),
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black54,
+                    fontSize: 25),
                 softWrap: true,
               ),
             ),
@@ -143,7 +144,10 @@ class AuthorContainer extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: Container(
         padding: EdgeInsets.only(
-          top: 20, left: 10, right: 10, bottom: 0,
+          top: 20,
+          left: 10,
+          right: 10,
+          bottom: 0,
         ),
         width: MediaQuery.of(context).size.width / 2,
         height: 110,
@@ -176,9 +180,7 @@ class AuthorContainer extends StatelessWidget {
                       Text(
                         widget.bookObject.author,
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500
-                        ),
+                            fontSize: 20, fontWeight: FontWeight.w500),
                       )
                     ],
                   ),
@@ -192,7 +194,9 @@ class AuthorContainer extends StatelessWidget {
                         size: 20,
                         color: Colors.yellow.shade700,
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Text(
                         widget.bookObject.rating.toString(),
                         style: TextStyle(color: Colors.black38, fontSize: 15),
@@ -204,6 +208,59 @@ class AuthorContainer extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class GenreContainer extends StatelessWidget {
+  final DetailsPageBody widget;
+
+  const GenreContainer({@required this.widget});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 110,
+      padding: EdgeInsets.only(top: 0, left: 20, right: 20, bottom: 20),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.black12, width: 2)),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: 50,
+                  width: 50,
+                  child: Image.network(
+                    "https://ecdn.teacherspayteachers.com/thumbitem/Genre-Posters-Book-Genres-Fiction-and-Nonfiction-Genre-Posters-3310346-1502225184/original-3310346-1.jpg",
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "GENRE",
+                      style: TextStyle(
+                          letterSpacing: 1.5,
+                          color: Colors.black38,
+                          fontSize: 12),
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
