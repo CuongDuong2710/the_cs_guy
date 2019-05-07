@@ -226,39 +226,85 @@ class GenreContainer extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
+          CategoryBox(
+            category: "GENRE",
+            categoryValue: widget.bookObject.genre,
+            categoryIcon:
+                "https://cdn3.vectorstock.com/i/thumb-large/93/62/psychology-icon-vector-15909362.jpg",
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          CategoryBox(
+            category: "LANGUAGE",
+            categoryValue: widget.bookObject.lanugage,
+            categoryIcon:
+                "https://cdn2.iconfinder.com/data/icons/translation-1/513/translation-translate-language-international-translating_2_copy_7-512.png",
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          CategoryBox(
+            category: "AGE",
+            categoryValue: widget.bookObject.age,
+            categoryIcon:
+                "https://image.flaticon.com/icons/png/512/31/31370.png",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryBox extends StatelessWidget {
+  final String category;
+  final String categoryValue;
+  final String categoryIcon;
+
+  const CategoryBox(
+      {Key key,
+      @required this.category,
+      @required this.categoryValue,
+      @required this.categoryIcon})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.black12, width: 2)),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      child: Row(
+        children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.black12, width: 2)),
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: Image.network(
-                    "https://ecdn.teacherspayteachers.com/thumbitem/Genre-Posters-Book-Genres-Fiction-and-Nonfiction-Genre-Posters-3310346-1502225184/original-3310346-1.jpg",
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "GENRE",
-                      style: TextStyle(
-                          letterSpacing: 1.5,
-                          color: Colors.black38,
-                          fontSize: 12),
-                    )
-                  ],
-                )
-              ],
+            height: 50,
+            width: 50,
+            child: Image.network(
+              categoryIcon,
+              fit: BoxFit.contain,
             ),
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                category,
+                style: TextStyle(
+                    letterSpacing: 1.5, color: Colors.black38, fontSize: 12),
+              ),
+              Text(
+                categoryValue,
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600),
+              )
+            ],
           )
         ],
       ),
