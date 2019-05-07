@@ -50,6 +50,7 @@ class _DetailsState extends State<Details> {
         ),
       ),
       body: DetailsPageBody(widget.bookObject),
+      bottomNavigationBar: BottomBar(widget.bookObject),
     );
   }
 }
@@ -393,5 +394,51 @@ class TabBarContainer extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class BottomBar extends StatefulWidget {
+  final Book bookObject;
+
+  BottomBar(this.bookObject);
+
+  @override
+  _BottomBarState createState() => _BottomBarState();
+}
+
+class _BottomBarState extends State<BottomBar> {
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      elevation: 0.0,
+      child: Container(
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(top: BorderSide(color: Colors.black12, width: 2))),
+        child: Row(
+          children: <Widget>[PriceWidget(widget: widget), AddButton()],
+        ),
+      ),
+    );
+  }
+}
+
+class AddButton extends StatefulWidget {
+  @override
+  _AddButtonState createState() => _AddButtonState();
+}
+
+class _AddButtonState extends State<AddButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class PriceWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
