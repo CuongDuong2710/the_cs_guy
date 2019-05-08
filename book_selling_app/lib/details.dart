@@ -3,6 +3,7 @@ import 'models/book.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 
 bool inCart;
+bool isFav;
 
 class Details extends StatefulWidget {
   final Book bookObject;
@@ -18,6 +19,7 @@ class _DetailsState extends State<Details> {
   void initState() {
     super.initState();
     inCart = false;
+    isFav = false;
   }
 
   @override
@@ -47,10 +49,17 @@ class _DetailsState extends State<Details> {
                 size: 25,
               ),
               SizedBox(width: 25),
-              Icon(
-                Icons.favorite_border,
-                color: Colors.black87,
-                size: 25,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isFav = !isFav;
+                  });
+                },
+                child: Icon(
+                  isFav ? Icons.favorite : Icons.favorite_border,
+                  color: isFav ? Colors.red : Colors.black87,
+                  size: 25,
+                ),
               ),
               SizedBox(width: 25)
             ],
