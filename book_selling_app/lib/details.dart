@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'models/book.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 
+bool inCart;
+
 class Details extends StatefulWidget {
   final Book bookObject;
 
@@ -12,6 +14,12 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  @override
+  void initState() {
+    super.initState();
+    inCart = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -430,15 +438,72 @@ class AddButton extends StatefulWidget {
 }
 
 class _AddButtonState extends State<AddButton> {
+  String _buttonText = "Add to cart";
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Padding(
+      padding: EdgeInsets.only(right: 10),
+      child: RaisedButton(
+        padding: EdgeInsets.symmetric(horizontal: 22, vertical: 11),
+        elevation: 1.0,
+        onPressed: () {
+          setState(() {
+            _addToCart();
+          });
+        },
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.shopping_cart,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              _buttonText,
+              style: TextStyle(color: Colors.white),
+            )
+          ],
+        ),
+        color: inCart ? Colors.red : Colors.black54,
+      ),
+    );
+  }
+
+  _addToCart() {
+    inCart = !inCart;
+    _buttonText = (inCart == false) ? "Add to cart" : "Remove from cart";
   }
 }
 
 class PriceWidget extends StatelessWidget {
+  final BottomBar widget;
+
+  const PriceWidget({@required this.widget});
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Expanded(
+      child: RichText(
+        text: TextSpan(children: [
+          TextSpan(
+              text: "\$" + widget.bookObject.price.toString(),
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontFamily: "lovelo",
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500)),
+          TextSpan(text: "   "),
+          TextSpan(
+              text: "\$" + (widget.bookObject.price + 5.45).toString(),
+              style: TextStyle(
+                  color: Colors.black26,
+                  fontSize: 15,
+                  decoration: TextDecoration.lineThrough))
+        ]),
+      ),
+    );
   }
 }
